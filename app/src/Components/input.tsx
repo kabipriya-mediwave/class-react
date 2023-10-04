@@ -1,22 +1,29 @@
-import React from "react";
-interface InputProps {
+import { Component } from "react";
+
+interface inputProps {
+  name: string;
   type: string;
   placeholder: string;
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-class Input extends React.Component<InputProps> {
+
+class Input extends Component<inputProps> {
   render() {
     return (
-      <input
-        type={this.props.type}
-        placeholder={this.props.placeholder}
-        value={this.props.value}
-        onChange={this.props.onChange}
-        name={this.props.name}
-      />
+      <div>
+        <label>
+          {this.props.name}
+          <input
+            name={this.props.name}
+            type={this.props.type}
+            placeholder={this.props.placeholder}
+            onChange={this.props.onChange}
+          />
+        </label>
+      </div>
     );
   }
 }
+
 export default Input;

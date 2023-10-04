@@ -1,93 +1,80 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 // import "./App.css";
+// import Components from "./Components";
 
 // function App() {
-//   const [count, setCount] = useState(0);
-
+//   const { Button, Input } = Components;
 //   return (
-//     <>
-//       <div>
-//         <a href="https://vitejs.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
+//     <div className="App">
+//       <header className="App-header">
+//         <Input
+//           name="First Name"
+//           type="text"
+//           placeholder="Enter your First name"
+//         />
+//         <Input
+//           name="Second Name"
+//           type="text"
+//           placeholder="Enter your Second name"
+//         />
+//         <Input name="Your Age" type="number" placeholder="Enter your age" />
+
+//         <Button />
+//       </header>
+//     </div>
 //   );
 // }
 
 // export default App;
+
 import React, { Component } from "react";
+import "./App.css";
 import Components from "./Components";
-interface AppState {
-  firstName: string;
-  lastName: string;
-  age: string;
-}
-class App extends Component<{}, AppState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      age: "",
-    };
-  }
-  handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
+class App extends Component {
+  state = {
+    firstName: "",
+    secondName: "",
+    age: "",
+  };
+  handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ firstName: e.target.value });
+  };
+  handleSecondNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ secondName: e.target.value });
+  };
+  handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ age: e.target.value });
+  };
+  display = () => {
     console.log(this.state);
   };
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ [e.target.name]: e.target.value } as Pick<
-      AppState,
-      keyof AppState
-    >);
-  };
   render() {
-    const { Button, Input } = Components; 
+    const { Button, Input } = Components;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="App">
+        <header className="App-header">
           <Input
+            name="First Name"
             type="text"
-            placeholder="First Name"
-            name="firstName"
+            placeholder="Enter your First name"
             value={this.state.firstName}
-            onChange={this.handleInputChange}
+            onChange={this.handleFirstNameChange}
           />
           <Input
+            name="Second Name"
             type="text"
-            placeholder="Last Name"
-            name="lastName"
-            value={this.state.lastName}
-            onChange={this.handleInputChange}
+            placeholder="Enter your Second name"
+            value={this.state.secondName}
+            onChange={this.handleSecondNameChange}
           />
           <Input
-            type="text"
-            placeholder="Age"
-            name="age"
+            name="Your Age"
+            type="number"
+            placeholder="Enter your age"
             value={this.state.age}
-            onChange={this.handleInputChange}
+            onChange={this.handleAgeChange}
           />
-          <Button label="Submit" />
-        </form>
+          <Button onClick={this.display} name="Submit" />
+        </header>
       </div>
     );
   }

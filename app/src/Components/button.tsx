@@ -1,12 +1,16 @@
-import React from 'react';
+import React from "react";
 interface ButtonProps {
-  label: string;
+  name: string;
+  onClick: () => void;
 }
 class Button extends React.Component<ButtonProps> {
   render() {
-    return <button type="submit">submit</button>;
+    return (
+      <div>
+        <button onClick={this.props.onClick}>{this.props.name}</button>
+      </div>
+    );
   }
 }
-export default Button;
 
-// {this.props.label}
+export default Button;
